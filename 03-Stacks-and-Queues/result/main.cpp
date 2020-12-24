@@ -1,15 +1,17 @@
 #include <iostream>
-#include "ArrayStack.h"
+#include "ArrayQueue.h"
 
-int main(){
-    ArrayStack<int> *arrayStack = new ArrayStack<int>();
-    for(int i=0;i<5;++i){
-        arrayStack->push(i);
-        arrayStack->print();
-    }
-    std::cout << arrayStack->pop() << std::endl;
-    arrayStack->print();
-    arrayStack = nullptr;
-    delete arrayStack;
+int main() {
+    ArrayQueue<int> *arrayQueue = new ArrayQueue<int>();
+    for (int i = 0; i < 10; ++i) {
+		arrayQueue->enqueue(i);
+		arrayQueue->print();
+    	if (i % 3 == 2) {
+	    	arrayQueue->dequeue();
+	    	arrayQueue->print();
+		}
+    } 
+	arrayQueue = nullptr;
+    delete arrayQueue;
     return 0;
 }

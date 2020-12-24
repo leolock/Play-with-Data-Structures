@@ -17,9 +17,9 @@ public:
 
     // 无参数的构造函数，默认数组的容量capacity=10
     Array() {
-        data = new T[5];
+        data = new T[10];
         size = 0;
-        capacity = 5;
+        capacity = 10;
     }
 
     // 获取数组的容量
