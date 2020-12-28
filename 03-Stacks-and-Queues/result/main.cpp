@@ -1,17 +1,12 @@
 #include <iostream>
 #include "ArrayQueue.h"
-
+#include "LoopQueue.h"
 int main() {
-    ArrayQueue<int> *arrayQueue = new ArrayQueue<int>();
-    for (int i = 0; i < 10; ++i) {
-		arrayQueue->enqueue(i);
-		arrayQueue->print();
-    	if (i % 3 == 2) {
-	    	arrayQueue->dequeue();
-	    	arrayQueue->print();
-		}
-    } 
-	arrayQueue = nullptr;
-    delete arrayQueue;
+	LoopQueue<int> *loopQueue = new LoopQueue<int>(5);
+	for(int i=0;i<10;++i){
+		loopQueue->enqueue(i);
+		loopQueue->print();
+	}
+    
     return 0;
 }
