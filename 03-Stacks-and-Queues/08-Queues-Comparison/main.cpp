@@ -1,6 +1,7 @@
 #include <iostream>
 #include "ArrayQueue.h"
 #include "LoopQueue.h"
+#include <time.h>
 
 template<typename T>
 double testQueue(T *queue, int opCount) {
