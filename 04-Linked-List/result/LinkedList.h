@@ -1,95 +1,93 @@
-//
-// Created by hpf on 18-5-8.
-//
-
 #include <iostream>
 #include <cassert>
 
 template<typename T>
-class Node {
+class Node{
 public:
     T e;
     Node<T> *next;
 
-    Node(T e, Node<T> *next) : e(e), next(next) {}
+    Node(T e, Node *next) : e(e), next(next){}
 
-    Node(T e) : e(e), next(nullptr) {}
-    
-    Node() : next(nullptr) {}
+    Node(T e): e(e), next(nullptr){}
+
+    Node(): next(nullptr){}
+
 };
 
 template<typename T>
-class LinkedList {
+class LinkedList{
 public:
-    LinkedList() {
+    LinkedList(){
         head = new Node<T>();
-	    size = 0;
+        size = 0;
     }
-
-    int getSize() {
+    // ~LinkedList(){
+    //     delete head;
+    //     head = nullptr;
+    // }
+    int getSize(){
         return size;
     }
 
-    bool isEmpty() {
+    bool isEmpty(){
         return size == 0;
     }
 
-    void add(int index, T e) {
-        assert(index >= 0 && index <= size);
+    void add(int index, T e){
+        assert(index>=0 && index<=size);
         Node<T> *prev = head;
-        for (int i = 0; i < index; ++i) {
+        for(int i=0;i<index;++i){
             prev = prev->next;
         }
         prev->next = new Node<T>(e, prev->next);
         size++;
     }
 
-    void addFirst(T e) {
+    void addFirst(T e){
         add(0, e);
     }
 
-    void addLast(T e) {
+    void addLast(T e){
         add(size, e);
     }
 
-    T get(int index) {
-        assert(index >= 0 && index < size);
+    T get(int index){
+        assert(index>=0 && index<size);
         Node<T> *cur = head->next;
-        for (int i = 0; i < index; ++i) {
+        for(int i=0;i<index;i++){
             cur = cur->next;
         }
         return cur->e;
     }
 
-    T getFirst() {
+    T getFirst(){
         return get(0);
     }
 
-    T getLast() {
-        return get(size - 1);
+    T getLast(){
+        return get(size-1);
     }
 
-    void set(int index, T e) {
-        assert(index >= 0 && index < size);
+    void set(int index, T e){
+        assert(index>=0 && index<size);
         Node<T> *cur = head->next;
-        for (int i = 0; i < index; ++i) {
+        for(int i=0;i<index;++i){
             cur = cur->next;
         }
         cur->e = e;
     }
-
-    void setFirst(T e) {
-        set(0, e);
+    void setFirst(T e){
+        set(0,e);
+    }
+    void setLast(T e){
+        set(size-1, e);
     }
 
-    void setLast(T e) {
-        set(size - 1, e);
-    }
-
-    T remove(int index) {
-        assert(index >= 0 && index < size);
+    T remove(int index){
+        assert(index>=0 && index<size);
         Node<T> *prev = head;
-        for (int i = 0; i < index; ++i) {
+        for(int i=0;i<index;++i){
             prev = prev->next;
         }
         Node<T> *retNode = prev->next;
@@ -99,36 +97,32 @@ public:
         return retNode->e;
     }
 
-    T removeFirst() {
+    T removeFirst(){
         return remove(0);
     }
 
-    T removeLast() {
-        return remove(size - 1);
+    T removeLast(){
+        return remove(size-1);
     }
-
-    void removeElement(T e) {
+    //删除所有等于e的元素
+    void removeElement(T e){
+        assert(this->contains(e));
         Node<T> *prev = head;
-        while (prev->next != nullptr) {
-            if (prev->next->e == e) {
-                break;
+        for(int i=0;i<size;++i){
+            if(prev->next->e == e){
+                Node<T> *delNode = prev->next;
+                prev->next = delNode->next;
+                delNode->next = nullptr;
+                size--;
             }
             prev = prev->next;
         }
-
-        if (prev->next != nullptr) {
-            Node<T> *delNode = prev->next;
-            prev->next = delNode->next;
-            delNode->next = nullptr;
-            size--;
-        }
     }
-
-    bool contains(T e) {
+    bool contains(T e){
         Node<T> *cur = head;
-        for (int i = 0; i < size; ++i) {
+        for(int i=0;i<size;++i){
             cur = cur->next;
-            if (cur->e == e) {
+            if(cur->e == e){
                 return true;
             }
         }
@@ -148,8 +142,7 @@ public:
         }
         std::cout << "]" << std::endl;
     }
-
 private:
-    Node<T> *head;
+    Node<T>* head;
     int size;
 };
