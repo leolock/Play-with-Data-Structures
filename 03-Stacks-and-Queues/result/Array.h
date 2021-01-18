@@ -151,10 +151,6 @@ private:
     T *data;
     int size;
     int capacity;
-<<<<<<< HEAD
-    
-};
-=======
 
     // 将数组空间的容量变成newCapacity大小
     void resize(int newCapacity) {
@@ -169,4 +165,3 @@ private:
     }
 };
 
->>>>>>> 31b561973ba04348e77990b28a911f41305cbdfa
