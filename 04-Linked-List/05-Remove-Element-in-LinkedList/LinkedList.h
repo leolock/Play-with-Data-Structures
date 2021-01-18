@@ -23,7 +23,7 @@ class LinkedList {
 public:
     LinkedList() {
         head = new Node<T>();
-	size = 0;
+	    size = 0;
     }
 
     int getSize() {
