@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 
 template<typename T>
 class Node{
@@ -44,12 +45,70 @@ public:
         preOrder(root);
         std::cout << std::endl;
     }
+
+    void preOrderNR(){
+        std::stack<Node<T> *> stack;
+        stack.push(root);
+        while(!stack.empty()){
+            Node<T> *cur = stack.top();
+            std::cout << cur->e << " ";
+            if(cur->right != nullptr){
+                stack.push(cur->right);
+            }
+            if(cur->left != nullptr){
+                stack.push(cur->left);
+            }
+       }
+       std::cout << std::endl;
+    }
     void inOrder(){
         inOrder(root);
         std::cout << std::endl;
     }
+    void inOrderNR(){
+        std::stack<Node<T> *> stack;
+        Node<T> *cur = root;
+        while(cur != nullptr || !stack.empty()){
+            while(cur != nullptr){
+                stack.push(cur);
+                cur = cur->left;
+            }
+            if(!stack.empty()){
+                cur = stack.top();
+                std::cout << cur->e <<" ";
+                stack.pop();
+                cur = cur->right;
+            }
+        }
+        std::cout << std::endl;
+    }
     void postOrder(){
         postOrder(root);
+        std::cout << std::endl;
+    }
+
+    void postOrderNR(){
+        std::stack<Node<T> *> stack;
+        Node<T> *cur = root;
+        Node<T> *temp;
+        while(cur != nullptr || !stack.empty()){
+            while(cur != nullptr){
+                stack.push(cur);
+                cur = cur->left;
+            }
+            if(!stack.empty()){
+                cur = stack.top();
+                if(cur->right == nullptr || cur->right == temp){
+                    std::cout <<cur->e<<" ";
+                    stack.pop();
+                    temp = cur;
+                    cur = nullptr;
+                }
+                else{
+                    cur = cur->right;
+                }
+            }
+        }
         std::cout << std::endl;
     }
     // BST(T e){
