@@ -52,6 +52,7 @@ public:
         while(!stack.empty()){
             Node<T> *cur = stack.top();
             std::cout << cur->e << " ";
+            stack.pop();
             if(cur->right != nullptr){
                 stack.push(cur->right);
             }
