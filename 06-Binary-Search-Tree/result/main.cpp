@@ -1,30 +1,38 @@
 #include <iostream>
 #include "BST.h"
 #include "Array.h"
+#include <ctime>
 
+template<typename T>
+void shuffle(T arr[], int n){
+    srand(time(0));
+    for(int i = n-1;i>=0;i--){
+        int pos = (int)(rand()%n);
+        T t = arr[pos];
+        arr[pos] = arr[i];
+        arr[i] = t;
+    }
+}
 int main() {
     BST<int> bst;
-    int n = 1000;
+    int n = 100;
     for(int i=0;i<n;++i){
-        bst.add(rand()%10000);
+        bst.add(rand()%100);
     }
 
-    Array<int> *nums = new Array<int>();
-    int index = 0;
-    std::cout << bst.getSize() << " ";
-    while(!bst.isEmpty()){
-        nums->add(index, bst.removeMin());
-        index++;
+    int *order = new int[n];
+    for(int j=0;j<n;++j){
+        order[j]=j;
     }
-    std::cout << bst.getSize();
-    nums->print();
-    for(int i=1;i<nums->getSize();++i){
-        if(nums->get(i-1) > nums->get(i)){
-            std::cout << "error";
-            return -1;
+    shuffle(order, n);
+    std::cout << "size =" << bst.getSize() << std::endl;
+    for(int k = 0;k<n;++k){
+        if(bst.contains(order[k])){
+            bst.remove(order[k]);
+            std::cout <<"after rm" << order[k] << "size =" << bst.getSize();
         }
+        
     }
-    std::cout << "remove min test complete" << std::endl;
-    nums = nullptr;
+    
     return 0;
 }

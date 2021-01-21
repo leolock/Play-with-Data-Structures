@@ -158,6 +158,9 @@ public:
         root = removeMax(root);
         return ret;
     }
+    void remove(T e){
+        root = remove(root , e);
+    }
     void generateBSTString(Node<T> *node, int depth){
         if(node == nullptr){
             generateDepthString(depth);
@@ -273,5 +276,40 @@ private:
         }
         node->right = removeMax(node->right);
         return node;
+    }
+
+    Node<T> *remove(Node<T> *node, T e){
+        if(node == nullptr) return nullptr;
+        if(e < node->e){
+            node->left = remove(node->left, e);
+            return node;
+        }
+        else if(e > node->e){
+            node->right = remove(node->right, e);
+            return node;
+        }
+        else{
+            if(node->left == nullptr){
+                Node<T> *rightnode = node->right;
+                delete node;
+                size--;
+                return rightnode;
+            }
+            if(node->right == nullptr){
+                Node<T> *leftnode = node->left;
+                delete node;
+                size--;
+                return leftnode;
+            }
+
+            Node<T> *successor = new Node<T>(min(node->right)->e);
+            size++;
+            successor->right = removeMin(node->right);
+            successor->left = node->left;
+            node->left = node->right = nullptr;
+            delete node;
+            size--;
+            return successor;
+        }
     }
 };
