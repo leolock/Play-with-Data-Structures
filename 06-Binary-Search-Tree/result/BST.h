@@ -1,5 +1,7 @@
 #include <iostream>
 #include <stack>
+#include <queue>
+#include <cassert>
 
 template<typename T>
 class Node{
@@ -118,6 +120,44 @@ public:
     //     root->right = nullptr;
     // }
 
+    void levelOrder(){
+        std::queue<Node<T> *> q;
+        q.push(root);
+        while(!q.empty()){
+            Node<T> *cur = q.front();
+            q.pop();
+            std::cout << cur->e <<" ";
+            if(cur->left != nullptr){
+                q.push(cur->left);
+            }
+            if(cur->right != nullptr){
+                q.push(cur->right);
+            }
+        }
+        std::cout << std::endl;
+    }
+
+    T minimum(){
+        assert(size > 0);
+        return min(root) ->e;
+    }
+
+    T maxmum(){
+        assert(size > 0);
+        return max(root) ->e;
+    }
+
+    T removeMin(){
+        T ret = minimum();
+        root = removeMin(root);
+        return ret;
+    }
+
+    T removeMax(){
+        T ret = maxmum();
+        root = removeMax(root);
+        return ret;
+    }
     void generateBSTString(Node<T> *node, int depth){
         if(node == nullptr){
             generateDepthString(depth);
@@ -197,5 +237,41 @@ private:
         for(int i=0;i<depth;++i){
             std::cout << "--";
         }
+    }
+
+    Node<T> *min(Node<T> *node){
+        if(node->left == nullptr){
+            return node;
+        }
+        return min(node->left);
+    }
+
+    Node<T> *max(Node<T> *node){
+        if(node->right == nullptr){
+            return node;
+        }
+        return max(node->right);
+    }
+
+    Node<T> *removeMin(Node<T> *node){
+        if(node->left == nullptr){
+            Node<T> *rightNode = node->right;
+            delete node;
+            size--;
+            return rightNode;
+        }
+        node->left = removeMin(node->left);
+        return node;
+    }
+
+    Node<T> *removeMax(Node<T> *node){
+        if(node->right == nullptr){
+            Node<T> *rightNode = node->right;
+            delete node;
+            size--;
+            return node->right;
+        }
+        node->right = removeMax(node->right);
+        return node;
     }
 };
