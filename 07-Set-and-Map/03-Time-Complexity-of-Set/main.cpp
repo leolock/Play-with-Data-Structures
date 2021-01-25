@@ -2,6 +2,7 @@
 #include "LinkedListSet.h"
 #include "FileOperation.h"
 #include "BSTSet.h"
+#include <time.h>
 
 template<typename T>
 double testSet(T *set, string filename) {

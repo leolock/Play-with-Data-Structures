@@ -99,7 +99,7 @@ private:
             cur = cur->next;
         }
         return nullptr;
-    };
+    }
 
 };
 

@@ -14,7 +14,7 @@ class Map {
 
     virtual Value get(Key key) = 0;
 
-    virtual void set(Key key, Value value) = 0;
+    virtual void set(Key key, Value newValue) = 0;
 
     virtual int getSize() = 0;
 
