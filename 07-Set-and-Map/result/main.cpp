@@ -1,27 +1,25 @@
 #include <iostream>
-#include "LinkedListMap.h"
 #include "fileOperations.h"
-#include "BSTSet.h"
-#include <time.h>
+#include "BSTMap.h"
 
 int main() {
     std::cout << "pride-and-prejudice.txt" << std::endl;
     // string filename = ".././pride-and-prejudice.txt";
     string filename = "d:\\Projects\\Play-with-Data-Structures\\07-Set-and-Map\\result\\pride-and-prejudice.txt";
-    LinkedListMap<string, int> *linkedListMap = new LinkedListMap<string, int>();
+    BSTMap<string, int> *bstMap = new BSTMap<string, int>();
     vector<string> words;
     if (FileOps::readFile(filename, words)) {
         std::cout << "Total words: " << words.size() << std::endl;
         for (string word : words) {
-            if (linkedListMap->contains(word)) {
-                linkedListMap->set(word, linkedListMap->get(word) + 1);
+            if (bstMap->contains(word)) {
+                bstMap->set(word, *(bstMap->get(word)) + 1);
             } else {
-                linkedListMap->add(word, 1);
+                bstMap->add(word, 1);
             }
         }
-        std::cout << "Total different words: " << linkedListMap->getSize() << std::endl;
-        std::cout << "Frequency of PRIDE: " << linkedListMap->get("pride") << std::endl;
-        std::cout << "Frequency of PREJUDICE: " << linkedListMap->get("prejudice") << std::endl;
+        std::cout << "Total different words: " << bstMap->getSize() << std::endl;
+        std::cout << "Frequency of PRIDE: " << *(bstMap->get("pride")) << std::endl;
+        std::cout << "Frequency of PREJUDICE: " << *(bstMap->get("prejudice")) << std::endl;
     }
     return 0;
 }

@@ -4,7 +4,8 @@
 
 int main() {
     std::cout << "pride-and-prejudice.txt" << std::endl;
-    string filename = ".././pride-and-prejudice.txt";
+    // string filename = ".././pride-and-prejudice.txt";
+    string filename = "d:\\Projects\\Play-with-Data-Structures\\07-Set-and-Map\\result\\pride-and-prejudice.txt";
     BSTMap<string, int> *bstMap = new BSTMap<string, int>();
     vector<string> words;
     if (FileOps::readFile(filename, words)) {
