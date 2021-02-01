@@ -1,6 +1,7 @@
 #include <iostream>
 #include "MaxHeap.h"
 #include <cassert>
+#include <time.h>
 
 template<typename T>
 double testHeap(T testData[], int n, bool isHeapify) {
